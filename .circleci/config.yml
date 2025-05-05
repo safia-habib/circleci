@@ -27,13 +27,16 @@ jobs:
             sudo apt-get install -y google-chrome-stable
       - run:
           name: Run server in background
-          command: nohup node server.js &
+          command: nohup node server.js > server.log 2>&1 &
+      - run:
+          name: Checking server logs if it fails 
+          command: cat server.log || echo "No Logs available"
       - run:
           name: Wait for server to start
           command: |
-            for i in {1..120}
+            for i in {1..60}
             do
-              nc -z 0.0.0.0 3000 && echo "Server is up!" && exit 0
+              curl -s http://0.0.0.0:3000 && echo "Server is up!" && exit 0
               sleep 1
             done
             echo "Server did not start in time" && exit 1
