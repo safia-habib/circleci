@@ -4,7 +4,7 @@ describe("Button Click Test", () => {
   let browser, page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({ headless: true });
     page = await browser.newPage();
     await page.goto("http://localhost:3000");
   });
