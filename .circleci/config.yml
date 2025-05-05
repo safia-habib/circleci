@@ -13,6 +13,8 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
+          command: npm install 
+      - run: 
           command: npm install jest-junit
       - run:
           command: npm install puppeteer
@@ -31,14 +33,12 @@ jobs:
       - run:
           name: Wait for server to be available
           command: |
-            for i in {1..30}; do
-              if nc -z 127.0.0.1 3000; then
-                echo "Server is up!"
-                break
-              fi
-              echo "Waiting for server..."
-              sleep 1
+            for i in {1..120}; 
+            do
+             curl -s http://0.0.0.0:3000 && echo "Server is up!" && exit 0
+             sleep 1
             done
+            echo "Server did not start in time" && exit 1
       - run:
           name: Checking server logs if it fails 
           command: cat server.log || echo "No Logs available"
