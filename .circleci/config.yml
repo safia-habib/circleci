@@ -31,9 +31,9 @@ jobs:
       - run:
           name: Wait for server to start
           command: |
-            for i in {1..15}
+            for i in {1..30}
             do
-              nc -z 127.0.0.1 3000 && echo "Server is up!" && exit 0
+              nc -z 0.0.0.0 3000 && echo "Server is up!" && exit 0
               sleep 1
             done
             echo "Server did not start in time" && exit 1
