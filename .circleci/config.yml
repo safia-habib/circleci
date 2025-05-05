@@ -33,9 +33,9 @@ jobs:
       - run:
           name: Checking server logs if it fails 
           command: cat server.log || echo "No Logs available"
-      - run: 
+      - run:
           name: Check if the server is up on port 3000
-          command: netstat -tuln | grep 3000
+          command: lsof -i :3000
       - run:
           name: Wait for server to be available
           command: |
