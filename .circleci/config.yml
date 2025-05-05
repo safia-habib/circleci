@@ -26,6 +26,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y google-chrome-stable
       - run:
+          name: Run server in background
+          command: nohup node server.js &
+      - run:
           name: Run tests
           command: node --experimental-vm-modules ./node_modules/jest/bin/jest.js
       - store_test_results:
