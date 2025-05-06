@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Wait for server to be available
           command: |
-            for i in {1..60}; 
+            for i in {1..120}; # Increased wait time from 60 to 120 seconds
             do
              curl -s http://0.0.0.0:3000 && echo "Server is up!" && exit 0
              sleep 1
